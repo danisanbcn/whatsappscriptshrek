@@ -1,8 +1,8 @@
-# WhatsApp Shrek Troll 🐸📜
+# Shrek Trolling 🐸📜
 
-Un script en JavaScript para enviar **línea por línea** el guion de Shrek (o cualquier texto largo) a través de **WhatsApp Web**.
+Un script en JavaScript para enviar **línea por línea** el guion de Shrek (o cualquier texto largo) a través de **WhatsApp Web** o de **Telegram Web**.
 
-⚠️ **Este script es SOLO para molestar a estafadores de WhatsApp** que intenten engañarte.  
+⚠️ **Este script es SOLO para molestar a estafadores** que intenten engañarte.  
 No lo uses contra personas reales o en situaciones donde pueda considerarse acoso.
 
 ---
