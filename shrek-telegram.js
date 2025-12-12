@@ -74,3 +74,37 @@ function splitLongLine(line, limit) {
   }
   return parts;
 }
+
+(async () => {
+  const lines = RAW_TEXT.replace(/\r\n/g, '\n').split('\n');
+
+  const queue = [];
+  for (const line of lines) {
+    if (!SKIP_EMPTY_LINES && line === '') {
+      queue.push(' '); // Telegram a veces ignora vacío → espacio troll
+    } else if (line.length > LONG_LINE_LIMIT) {
+      queue.push(...splitLongLine(line, LONG_LINE_LIMIT));
+    } else {
+      queue.push(line);
+    }
+  }
+
+  console.log(`📨 Enviando ${queue.length} mensajes (Telegram Web K)...`);
+
+  for (let i = 0; i < queue.length; i++) {
+    try {
+      await sendOne(queue[i]);
+      console.log(`✔️ ${i + 1}/${queue.length}`);
+      await sleep(LINE_DELAY_MS);
+    } catch (e) {
+      console.warn(`⚠️ Error en línea ${i + 1}: ${e.message}`);
+      console.warn('⏳ Reintentando en 3s...');
+      await sleep(3000);
+      await sendOne(queue[i]);
+      await sleep(LINE_DELAY_MS);
+    }
+  }
+
+  console.log('🎉 Troll terminado. Telegram sigue en pie (de momento).');
+})();
+
